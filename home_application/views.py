@@ -15,11 +15,10 @@ def home(request):
         pattern = re.compile('<h2.*?href="(.*?)".*?Title">(.*?)</a></h2>', re.S)
         items = re.findall(pattern, content)
         table_head = {'url', 'title'}
-        data = []
         for i in range(5):
             list_data = dict(zip(table_head, list(items[i])))
             zhihu.objects.create(url=list_data['url'], title=list_data['title']).save()
-            data.append(list_data)
+        data = zhihu.objects.all()
     except urllib2.URLError, e:
         if hasattr(e, "code"):
             print e.code
