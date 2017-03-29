@@ -13,14 +13,13 @@
                 </tr>
             </thead>
             <tbody>
-            {% if data %}
-                {% for item in data %}
+
+                % for item in data:
                     <tr>
-                        <td>{{ item.url }}</td>
-                        <td>{{ item.title }}</td>
+                        <td>https://www.zhihu.com${ item['url'] }</td>
+                        <td>${ item['title'] }</td>
                     </tr>
-                {% endfor %}
-            {% endif %}
+                % endfor
             </tbody>
         </table>
     </div>

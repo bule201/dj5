@@ -5,20 +5,19 @@ from common.mymako import render_mako_context
 from home_application.models import zhihu
 
 def home(request):
-    url = 'https://www.zhihu.com/topic/19607535/hot'
-    user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
-    headers = {'User-Agent': user_agent}
+    tag_url = 'https://www.zhihu.com/topic/19607535/hot'
     try:
-        request = urllib2.Request(url, headers=headers)
-        response = urllib2.urlopen(request)
-        content = response.read().decode('utf-8')
+        response = urllib2.urlopen(tag_url)
+        content = response.read()
         pattern = re.compile('<h2.*?href="(.*?)".*?Title">(.*?)</a></h2>', re.S)
         items = re.findall(pattern, content)
-        table_head = {'url', 'title'}
-        for i in range(5):
-            list_data = dict(zip(table_head, list(items[i])))
-            zhihu.objects.create(url=list_data['url'], title=list_data['title']).save()
-        data = zhihu.objects.all()
+        zhihu.objects.all().delete()
+        for item in items:
+            zhihu.objects.create(url=item[0], title=item[1]).save()
+        list_data = zhihu.objects.all()
+        data = list(list_data.values('url', 'title'))
+        print data
+
     except urllib2.URLError, e:
         if hasattr(e, "code"):
             print e.code
