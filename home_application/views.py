@@ -11,10 +11,10 @@ def home(request):
         content = response.read()
         pattern = re.compile('<h2.*?href="(.*?)".*?Title">(.*?)</a></h2>', re.S)
         items = re.findall(pattern, content)
-        zhihu.objects.all().delete()
+        list_data = zhihu.objects.all()
+        list_data.delete()
         for item in items:
             zhihu.objects.create(url=item[0], title=item[1]).save()
-        list_data = zhihu.objects.all()
         data = list(list_data.values('url', 'title'))
 
     except urllib2.URLError, e:
