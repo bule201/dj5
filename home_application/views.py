@@ -16,7 +16,6 @@ def home(request):
             zhihu.objects.create(url=item[0], title=item[1]).save()
         list_data = zhihu.objects.all()
         data = list(list_data.values('url', 'title'))
-        print data
 
     except urllib2.URLError, e:
         if hasattr(e, "code"):
