@@ -1,0 +1,30 @@
+<%inherit file="/base.html"/>
+
+<%block name="content">
+<div class="main_wrap w_940 clearfix" id="table4_demo4" style="width:800px;">
+
+    <!-- 表格 start -->
+    <div class="table_wrap" style="margin-top:20px;">
+        <table id="grid">
+            <thead>
+                <tr>
+                    <th width="20%">访问地址</th>
+                    <th width="20%">热门话题</th>
+                </tr>
+            </thead>
+            <tbody>
+                %for item in data:
+                    <tr>
+                        <td>${item['url']}</td>
+                        <td>${item['title']}</td>
+                    </tr>
+                %endfor
+            </tbody>
+        </table>
+    </div>
+    <!-- 表格 end -->
+</div>
+
+</%block>
+
+
