@@ -22,8 +22,8 @@ from django.conf.global_settings import *
 # 应用基本信息配置 (请按照说明修改)
 # ==============================================================================
 # 在蓝鲸智云开发者中心 -> 点击应用ID -> 基本信息 中获取 APP_ID 和 APP_TOKEN 的值
-APP_ID = 'myapp'
-APP_TOKEN = '3cdd2070-c082-4fdc-a82d-6423e1bccc68'
+APP_ID = 'dj5'
+APP_TOKEN = '623710f2-7594-4022-ac1e-df2642504628'
 # 蓝鲸智云开发者中心的域名，形如：http://paas.bking.com
 BK_PAAS_HOST = 'http://paas.gtayw.com/'
 
