@@ -2,7 +2,7 @@
 import urllib2
 import re
 from common.mymako import render_mako_context
-from home_application.models import ZhiHu
+from home_application.models import zhihu
 
 def home(request):
     url = 'https://www.zhihu.com/topic/19607535/hot'
@@ -18,7 +18,7 @@ def home(request):
         data = []
         for i in range(5):
             list_data = dict(zip(table_head, list(items[i])))
-            ZhiHu.objects.create(url=list_data['url'], title=list_data['title']).save()
+            zhihu.objects.create(url=list_data['url'], title=list_data['title']).save()
             data.append(list_data)
     except urllib2.URLError, e:
         if hasattr(e, "code"):

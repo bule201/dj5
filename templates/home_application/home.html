@@ -13,12 +13,12 @@
                 </tr>
             </thead>
             <tbody>
-                %for item in data:
+                {% for item in data %}
                     <tr>
                         <td>${item['url']}</td>
                         <td>${item['title']}</td>
                     </tr>
-                %endfor
+                {% endfor %}
             </tbody>
         </table>
     </div>
