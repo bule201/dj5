@@ -1,50 +1,43 @@
 <%inherit file="/base.html"/>
 
 <%block name="content">
-    <div class="demo" id="kendo_upload_demo3">
-        <input name="files" class="file_input" type="file">
+    <div class="king-page-box">
+        <div class="king-container clearfix">
+            <div class="panel panel-default mb0">
+                <div class="panel-heading"> 生成文件MD5值 </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group clearfix ">
+                            <label class="control-label col-sm-3 pt0 bk-h30 bk-lh30">文件选择：</label>
+                            <div class="col-sm-9" id="kendo_upload_demo1">
+                                <button class="king-btn king-default king-file-btn king-btn-small bk-mt3 bk-block"> 选择文件
+                                    <input type="file" class="file_input"  /> </button>
+                                <label >{文件名称}</label>
+                            </div>
+                        </div>
+                        <div class="form-group clearfix ">
+                            <label class="col-sm-3 control-label bk-lh30 pt0">MD5值：</label>
+                            <div class="col-sm-9">
+                                <input class="form-control bk-valign-top" type="text" placeholder="提示信息"></div>
+                        </div>
+                        <div class="form-group clearfix">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="king-btn mr10  king-success" type="button">提交</button>
+                                <button class="king-btn king-default " type="button">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <script type="text/javascript">
-        //自动上传
-        $("#kendo_upload_demo3 .file_input").kendoUpload({
-            localization: {
-                select: "请选择文件...",
-                remove: '删除',//删除按钮的tips
-                headerStatusUploading : '开始上传',
-                headerStatusUploaded : "文件上传成功"
-            },
-            async : {
-                autoUpload : true,
-                saveUrl : "save.action", //文件上传对应的接口
-                removeUrl : 'remove.action' //文件删除对应的接口
-            }
+
+    <script>
+        $(document).ready(function() {
+        //kendo_upload_demo1_js_start
+        $("#kendo_upload_demo1.file_input").kendoUpload();
+        //kendo_upload_demo1_js_end
         });
     </script>
 
-    <div class="row" id="plugin26_demo1">
-        <div class="col-sm-6">
-            <p class="magic-desc">MD5值</p>
-            <textarea class="form-control" id="zclip_text0" style="height: 100px;">测试文本测试文本测试文本</textarea>
-            <br>
-            <a class="king-btn king-info" href="javascript:;" data-clipboard-target="#zclip_text0" data-clipboard-action="copy">复制文本框的文字</a>
-        </div>
-        <div class="col-sm-6">
-            <p class="magic-desc">点击此处复制</p>
-            <textarea class="form-control" style="height: 100px;"></textarea>
-            <br>
-        </div>
-    </div>
-    <script type="text/javascript">
-        var clipboard = new Clipboard('.king-btn');
-
-        clipboard.on('success', function(e) {
-            console.log(e);
-            alert('复制成功！');
-        });
-
-        clipboard.on('error', function(e) {
-            console.log(e);
-            alert('复制失败！');
-        });
-    </script>
 </%block>
