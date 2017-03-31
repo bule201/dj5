@@ -7,8 +7,7 @@ import re
 from home_application.models import zhihu
 # second homework
 import hashlib
-import os
-from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 # third homework
 
 
@@ -33,21 +32,19 @@ def home(request):
     return render_mako_context(request, '/home_application/home.html', {'data': data})
 
 
-@csrf_exempt
 def dev_guide(request):
-    filename = '/home/dj5/urls.py'
-    if not os.path.isfile(filename):
-        return
-    myhash = hashlib.md5()
-    f = file(filename, 'rb')
-    while True:
-        b = f.read(8096)
-        if not b:
-            break
-        myhash.update(b)
-    f.close()
-    file_md5 = myhash.hexdigest()
-    return render_mako_context(request, '/home_application/dev_guide.html', {'md5': file_md5})
+    if request.method != 'POST':
+        return render_mako_context(request, '/home_application/dev_guide.html')
+
+    context = {}
+    for file_name, file_stream in request.FILES.iteritems():
+        name = request.FILES[file_name].name
+        md5sum = hashlib.md5(file_stream.read()).hexdigest()
+        context = {
+            'upload_file_name': name,
+            'upload_file_name_md5': md5sum,
+        }
+    return HttpResponse(context['upload_file_name_md5'])
 
 
 def contact(request):
