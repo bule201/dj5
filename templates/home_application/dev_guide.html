@@ -1,84 +1,100 @@
 <%inherit file="/base.html"/>
 
 <%block name="content">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <!-- 若您需要使用Kendo UI Professional，请联系版权人获得合法的授权或许可。 -->
+    <!-- Bootstrap css -->
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <!-- kendo ui css -->
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" rel="stylesheet">
+    <!-- font-awesome -->
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
+    <!--蓝鲸提供的公用样式库 -->
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/bk/css/bk.css?v=1.0.1" rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/bk/css/bk_pack.css" rel="stylesheet">
+    <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+    <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/bk/js/bk.js"></script>
+    <!-- 数据埋点统计 -->
+    <script src="https://magicbox.bkclouds.cc/static_api/analysis.js"></script>
+    <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
+    <!--[if lt IE 9]><script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script><script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
+    <script src="${STATIC_URL}js/jquery.form.js" type="text/javascript"></script>
+    <script src="${STATIC_URL}js/csrftoken.js" type="text/javascript"></script>
+</head>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title></title>
-        <!-- 若您需要使用Kendo UI Professional，请联系版权人获得合法的授权或许可。 -->
-        <!-- Bootstrap css -->
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        <!-- kendo ui css -->
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css" rel="stylesheet">
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css" rel="stylesheet">
-        <!-- font-awesome -->
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
-        <!--蓝鲸提供的公用样式库 -->
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/bk/css/bk.css?v=1.0.1" rel="stylesheet">
-        <link href="https://magicbox.bkclouds.cc/static_api/v3/bk/css/bk_pack.css" rel="stylesheet">
-        <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
-        <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
-        <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
-        <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-        <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
-        <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
-        <script src="https://magicbox.bkclouds.cc/static_api/v3/bk/js/bk.js"></script>
-        <!-- 数据埋点统计 -->
-        <script src="https://magicbox.bkclouds.cc/static_api/analysis.js"></script>
-        <!-- 以下两个插件用于在IE8以及以下版本浏览器支持HTML5元素和媒体查询，如果不需要用可以移除 -->
-        <!--[if lt IE 9]><script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/html5shiv.min.js"></script><script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/respond.min.js"></script><![endif]-->
-    </head>
-
-    <body class="bg-white" data-bg-color="bg-white">
-        <div class="king-page-box">
-            <div class="king-container clearfix">
-                <form class="upload_form">
-                    <div class="form-group clearfix ">
-                        <label class="control-label col-sm-3 pt0 bk-h30 bk-lh30">文件：</label>
-                        <div class="demo" id="kendo_upload_demo2">
-                            <input name="files" class="file_input" type="file" />
-                        <!-- 文件列表模板 -->
-                            <script id="fileTemplate" type="text/x-kendo-template">
-                                <span class='k-progress'></span>
-                                <div class='file-wrapper'>
-                                    <span class='k-upload-action' style="margin-top: -5px;">删除</span>
-                                    <span class='f13 fb' style="font-size:20px;">文件名: #=name#</span>
-                                    <span class="text-info" style="font-size:10px;">#=size# bytes</span>
-                                </div>
-                            </script>
+<body class="bg-white" data-bg-color="bg-white">
+    <div class="king-page-box">
+        <div class="king-container clearfix">
+            <div class="panel panel-default mb0">
+                <div class="panel-heading"> MD5生成与校验 </div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group clearfix ">
+                            <label class="control-label col-sm-3 pt0 bk-h30 bk-lh30">参数：</label>
+                            <div class="col-sm-9" id="kendo_upload_demo2">
+                                     <input name="files" class="file_input" type="file" id="file"/>
+                                <script id="fileTemplate" type="text/x-kendo-template">
+                                    <span class='k-progress'></span>
+                                    <div class='file-wrapper'>
+                                        <span class='k-upload-action' style="margin-top: -5px;">删除</span>
+                                        <span class='f13 fb'>文件名: #=name#</span>
+                                        <span class="text-info" style="font-size:9px;">#=size# bytes</span>
+                                    </div>
+                                </script>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group clearfix ">
-                        <label class="col-sm-3 control-label bk-lh30 pt0">MD5：</label>
-                        <div class="md5_output">
-                            <input class="form-control bk-valign-top" type="text" placeholder="提示信息">
+                        <div class="form-group clearfix">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button class="king-btn mr10  king-success" type="submit" id="btn">提交</button>
+                                <button class="king-btn king-default " type="button">取消</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group clearfix">
-                        <div class="col-sm-9 col-sm-offset-3">
-                            <button class="king-btn mr10  king-success" type="submit">提交</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
-    <!--JS-->
-    <script>
-        //kendo_upload_demo2_js_start
-        //自定义文件列表模板
-        $("#kendo_upload_demo2").kendoUpload({
-            localization: {
-                select: "请选择文件..."
-            },
-            template: kendo.template($('#fileTemplate').html())
+<script>
+    $("#kendo_upload_demo2").kendoUpload({
+        localization:  {
+           select: "请选择文件..."
+        },
+       template: kendo.template($('#fileTemplate').html())
+    });
+</script>
+<script>
+    $("#btn").click(function () {
+        var file = $("#file").val();
+        var fileName = getFileName(file);
 
+        function getFileName(o) {
+            var pos=o.lastIndexOf("\\");
+            return o.substring(pos+1);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "${SITE_URL}getdata/",
+            data: {"path": file},
+
+            success: function (file_md5) {
+                alert(file_md5);
+            }
         });
-        //kendo_upload_demo2_js_end
-
-    </script>
-
+        //alert(file);
+        //alert(fileName);
+    })
+</script>
 </%block>
