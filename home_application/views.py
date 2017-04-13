@@ -11,7 +11,8 @@ import hashlib
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 # third homework
-
+from Crypto.Cipher import AES
+from binascii import b2a_hex, a2b_hex
 
 def home(request):
     tag_url = 'https://www.zhihu.com/topic/19607535/hot'
@@ -54,7 +55,26 @@ def getdata(request):
     file_md5 = myhash.hexdigest()
     return HttpResponse(file_md5)
 
-
+@csrf_exempt
 def contact(request):
-    return render_mako_context(request, '/home_application/contact.html')
+    if request.method == "POST":
+        rec = request.POST
+        print rec
+        text = rec['text_input']
+        padding = bytes('\0')
+        key = bytes(rec['salt_input'] + padding * (16 - len(rec['salt_input']) % 16))[:16]
+        ase_cryptor = AES.new(key, AES.MODE_CBC, '1234567812345678')
+
+        try:
+            if rec['method'] == "encrypt":
+                result = b2a_hex(ase_cryptor.encrypt(text + padding * (16 - len(text) % 16)))
+
+            else:
+                result = ase_cryptor.decrypt(a2b_hex(text).rstrip('\0'))
+
+            return HttpResponse(result)
+        except Exception, e:
+            print Exception, ":", e
+    else:
+        return render_mako_context(request, '/home_application/contact.html')
 

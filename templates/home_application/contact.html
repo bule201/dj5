@@ -39,25 +39,25 @@
                 <div class="panel-body">
                     <form class="form-horizontal">
                         <div class="form-group clearfix ">
-                            <label class="col-sm-3 control-label bk-lh30 pt0">参数：</label>
+                            <label class="col-sm-3 control-label bk-lh30 pt0">文本：</label>
                             <div class="col-sm-9">
-                                <input class="form-control bk-valign-top" type="text" placeholder="提示信息"> </div>
+                                <input id="text" class="form-control bk-valign-top" type="text" placeholder="提示信息"> </div>
                         </div>
                         <div class="form-group clearfix ">
-                            <label class="col-sm-3 control-label bk-lh30 pt0">参数：</label>
+                            <label class="col-sm-3 control-label bk-lh30 pt0">密钥：</label>
                             <div class="col-sm-9">
-                                <input class="form-control bk-valign-top" type="text" placeholder="提示信息"> </div>
+                                <input id="salt" class="form-control bk-valign-top" type="text" placeholder="提示信息"> </div>
                         </div>
                         <div class="form-group clearfix ">
                             <label class="control-label col-sm-3 bk-lh30 pt0">方式：</label>
                             <div class="col-sm-9">
                                 <div class="radio pt0">
                                     <label class="mr10">
-                                        <input name="optionsRadios" class="bk-top5" type="radio" value="邮件">
+                                        <input name="optionsRadios" class="bk-top5" type="radio" value="encrypt">
                                         <span class="bk-lh30">加密</span>
                                     </label>
                                     <label class="mr10">
-                                        <input name="optionsRadios" class="bk-top5" type="radio" value="微信">
+                                        <input name="optionsRadios" class="bk-top5" type="radio" value="decrypt">
                                         <span class="bk-lh30">解密</span>
                                     </label>
                                 </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group clearfix">
                             <div class="col-sm-9 col-sm-offset-3">
-                                <button class="king-btn mr10  king-success" type="button">提交</button>
+                                <button class="king-btn mr10  king-success" type="button" id="btn">提交</button>
                                 <button class="king-btn king-default " type="button">取消</button>
                             </div>
                         </div>
@@ -77,9 +77,9 @@
                             </div>
                         </section>
                         <div class="form-group has-feedback clearfix ">
-                            <label class="control-label col-sm-3 pt0" for="introduction">参数：</label>
+                            <label class="control-label col-sm-3 pt0" for="introduction">结果：</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" placeholder="提示信息" rows="3">提示信息</textarea>
+                                <textarea id="result" class="form-control" placeholder="提示信息" rows="3"></textarea>
                             </div>
                         </div>
                     </form>
@@ -89,7 +89,30 @@
     </div>
 </body>
 <script>
+    $("#btn").click(function () {
+        var text_input = $("#text").val();
+        var salt_input = $("#salt").val();
+        var method = $('input:radio:checked').val();
+        $.ajax({
+            type: "POST",
+            url: "${SITE_URL}contact/",
+            data: {
+                "text_input": text_input,
+                "salt_input": salt_input,
+                "method": method
+            },
 
+            success: function (ret) {
+                $("#result").val(ret);
+                $("#result").attr("readonly", true)
+            }
+        });
+
+        //alert(text_input);
+        //alert(salt_input);
+        //alert(method);
+
+    })
 </script>
 </%block>
 
